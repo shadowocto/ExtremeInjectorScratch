@@ -1,0 +1,133 @@
+body, html {
+    background: linear-gradient(#1E90FF, #00BFFF) no-repeat;
+    height: max-content;
+    user-select: none;
+    width: 350px;
+    color: white;
+    margin: 0;
+}
+
+body, button, input {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+button {
+    transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
+    border: 1px solid #ADADAD;
+    background-color: #E1E1E1;
+    font-size: 0.95em;
+    font-weight: 500;
+    height: 22px;
+}
+
+button:hover, input[type=checkbox]:hover {
+    background-color: #E5F1FB;
+    border-color: #0278D7;
+}
+
+input[type="checkbox"] {
+    transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    position: relative;
+    appearance: none;
+    height: 14px;
+    width: 14px;
+}
+
+input[type="checkbox"]:checked::after {
+    border-width: 0 1px 1px 0;
+    transform: rotate(45deg);
+    border-color: #000000;
+    border-style: solid;
+    position: absolute;
+    content: "";
+    height: 9px;
+    width: 4px;
+    left: 4px;
+}
+
+.title-bar {
+    align-items: center;
+    background: white;
+    display: flex;
+    color: black;
+    padding: 1px;
+    gap: 2px;
+}
+
+.title-bar img {
+    height: 2em;
+}
+
+.title-bar span {
+    transform: translateY(-1px);
+    font-size: 1.1em;
+}
+
+.content {
+    width: calc(100% - 10px);
+    padding: 4px 5px 7px;
+}
+
+fieldset {
+    border: 1px solid #646464;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+/* table container */
+fieldset .table {
+    border: 1px solid black;
+    background: white;
+    max-height: 104px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+fieldset table {
+    height: min-content;
+    border-spacing: 0;
+    color: black;
+    width: 100%;
+}
+
+fieldset table * {
+    font-weight: normal;
+    padding-left: 6px;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+fieldset table th {
+    border-right: 1px solid #cdcdcd;
+    min-width: 6px;
+    height: 22px;
+}
+
+fieldset table tr:hover {
+    background: #f1f1f1;
+}
+
+fieldset table tr.selected {
+    background: #0278D7;
+    color: white;
+}
+
+.buttons {
+    justify-content: space-between;
+    padding: 0 2px;
+    display: flex;
+}
+
+.buttons button {
+    width: 100px;
+}
+
+fieldset .buttons {
+    justify-content: unset;
+    flex-direction: column;
+    width: 100px;
+    gap: 6px;
+}

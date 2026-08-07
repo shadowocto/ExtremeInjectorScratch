@@ -1,0 +1,31 @@
+{
+  "name": "Extreme Injector",
+  "description": "Sprite injector for Scratch\ngithub.com/shadowocto/ExtremeInjectorScratch",
+  "version": "1.0.0",
+    "icons": {
+    "16": "/img/90.png",
+    "64": "/img/90.png",
+    "128": "/img/90.png"
+  },
+  "manifest_version": 3,
+  "permissions": [
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "popup/index.html",
+    "default_icon": "/img/90.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://scratch.mit.edu/*"],
+      "run_at":"document_start",
+      "js": ["injector/injector.js", "injector/util.js"],
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://scratch.mit.edu/*"],
+      "run_at":"document_start",
+      "js": ["injector/communication.js"]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+        <title class="version">Extreme Injector v{VERSION} by shadowocto</title>
+    </head>
+    <body>
+        <div class="title-bar">
+            <img src="../extremeinjector.png">
+            <span class="version">Extreme Injector v{VERSION} by shadowocto</span>
+        </div>
+        <div class="content">
+            <fieldset>
+                <legend>Inject List</legend>
+
+                <div class="buttons">
+                    <button id="add">Add Sprite</button>
+                    <button id="toggle">Enable/Disable</button>
+                    <button id="remove">Remove</button>
+                    <button id="clear">Clear</button>
+                </div>
+
+                <div class="table">
+                    <table id="sprite-table">
+                        <tr>
+                            <th></th>
+                            <th>Sprite Name</th>
+                            <th></th>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+
+            <div class="buttons">
+                <button id="about">About</button>
+                <button id="settings">Settings</button>
+                <button id="inject" disabled>Inject</button>
+            </div>
+        </div>
+
+        <script src="util.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>
