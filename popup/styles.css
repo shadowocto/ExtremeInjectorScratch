@@ -25,6 +25,11 @@ button:hover, input[type=checkbox]:hover {
     border-color: #0278D7;
 }
 
+button:hover[disabled] {
+    border: 1px solid #ADADAD;
+    background-color: #E1E1E1;
+}
+
 input[type="checkbox"] {
     transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
     background-color: #ffffff;
