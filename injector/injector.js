@@ -6,11 +6,11 @@ for (let name of Object.getOwnPropertyNames(Reflect)) {
 }
 
 let vm;
-const hook = function(o,n,h) {
+const hook = function (o, n, h) {
     o[n] = new proxy(o[n], h);
 }
 
-hook(Function.prototype,"bind",{
+hook(Function.prototype, "bind", {
     apply(f, th, args) {
         try {
             if (args[0] != null && args[0]["runtime"] != null && args[0].hasOwnProperty("editingTarget")) {
@@ -18,29 +18,48 @@ hook(Function.prototype,"bind",{
                 vm = args[0];
                 Function.prototype.bind = f;
             }
-        } catch(e) {
+        } catch (e) {
             console.warn(`An exception occurred while attempting to expose the Scratch VM: ${e}`)
         }
         return reflect.apply(f, th, args);
     }
 });
 
-function inject(spriteBuffer) {
-    try {
-        vm.addSprite(new Uint8Array(spriteBuffer));
+const queue = [];
+let injecting = false;
 
-        // TODO: Make option in settings
-        // Hopefully sprite injection doesn't take more than 500ms or this will break
-        // (we should probably find a way to actually wait until it's fully loaded)
-        setTimeout(
-            () => vm.runtime.startHats("event_whenbroadcastreceived", {BROADCAST_OPTION: "ExternalInjectSignal"}),
-            500
-        )
+async function inject(spriteBuffer) {
+    console.log(injecting,queue,queue[0]);
+    if (injecting)
+        await queue.push(new Promise(()=>{}))
+    injecting = true
+    try {
+        const before = new WeakSet(vm.runtime.targets.filter(v => v.isOriginal));
+
+        await vm.addSprite(new Uint8Array(spriteBuffer)); // fuck you scratch for not returning the sprite
+
+        const sprites = vm.runtime.targets.filter(v => v.isOriginal).filter(v=>!before.has(v));
+        const sprite = sprites[0]; // this shouldn't fail i think
+
+        const blocks = sprite.blocks;
+        const scripts = blocks.getScripts();
+
+        for (let i = 0; i < scripts.length; i++) {
+            const block = blocks.getBlock(scripts[i]);
+            if (block.opcode == "event_whenflagclicked") {
+                vm.runtime._pushThread(block.id, sprite);
+            }
+        }
 
         console.log("Sprite injected successfully");
     } catch (error) {
         console.error("Failed to inject sprite:", error);
     }
+    console.log(queue);
+    if (queue[0] != null) {
+        Promise.resolve(queue.shift());
+    }
+    injecting = false;
 }
 
 document.addEventListener('ei-inject', event => {
