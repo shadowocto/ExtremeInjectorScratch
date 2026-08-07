@@ -6,3 +6,6 @@ To use Extreme Injector you must install it as an unpacked chrome extension, lea
 Bug Reporting
 ------
 To report any bugs or issues with the injector, please create an [Issue](https://github.com/shadowocto/ExtremeInjectorScratch/issues) on Github.
+
+![](https://raw.githubusercontent.com/shadowocto/ExtremeInjectorScratch/refs/heads/main/img/gui.png)\
+![](https://raw.githubusercontent.com/shadowocto/ExtremeInjectorScratch/refs/heads/main/img/about.png)
