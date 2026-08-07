@@ -25,9 +25,9 @@ hook(Function.prototype,"bind",{
     }
 });
 
-function inject(spriteBuffer) {
+async function inject(spriteBuffer) {
     try {
-        vm.addSprite(new Uint8Array(spriteBuffer));
+        await vm.addSprite(new Uint8Array(spriteBuffer));
 
         // TODO: Make option in settings
         // Hopefully sprite injection doesn't take more than 500ms or this will break
