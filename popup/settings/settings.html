@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings</title>
+
+    <link rel="stylesheet" href="../winui.css">
+    <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+    <div class="container">
+        <fieldset>
+            <legend>Injection Options</legend>
+            <input type="checkbox" id="greenFlag">
+            <label for="greenFlag">Trigger Green Flag Blocks</label>
+            <br>
+            <input type="checkbox" id="editorBypass" disabled>
+            <label for="editorBypass" disabled>Disable Editor Disconnect</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Theme Options</legend>
+            <div class="dropdown" id="theme">
+                <div class="arrow"></div>
+                <div class="value">(None)</div>
+
+                <div class="options">
+                    <div>Classic (Blue)</div>
+                    <div>Modern</div>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="buttons">
+            <button id="reset">Reset</button>
+            <div class="spacer"></div>
+            <button id="save">OK</button>
+        </div>
+    </div>
+
+    <script src="../js/settings.js"></script>
+    <script src="settings-ui.js"></script>
+</body>
+</html>

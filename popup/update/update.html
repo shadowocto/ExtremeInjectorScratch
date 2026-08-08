@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Notice</title>
+
+    <link rel="stylesheet" href="../winui.css">
+    <link rel="stylesheet" href="update.css">
+</head>
+<body>
+    <div class="content">
+        <img src="../../img/warning.png">
+        <div>
+            <b>You are running an outdated version</b>
+            <p>Your version: {VERSION}, Newest version: {UPDATE_VERSION}</p>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <div class="spacer"></div>
+        <button id="ignore">Ignore</button>
+        <button id="update">Update</button>
+    </div>
+
+    <script src="../js/util.js"></script>
+    <script src="update.js"></script>
+</body>
+</html>

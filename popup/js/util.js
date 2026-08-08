@@ -1,4 +1,4 @@
-const VERSION = "1.0.0";
+const VERSION = "1.1.0";
 
 function readFileAsArrayBuffer(file) {
     return new Promise((resolve, reject) => {
@@ -24,3 +24,11 @@ function arrayBufferToBase64(buffer) {
 document.querySelectorAll(".version").forEach(element =>
    element.innerText = element.innerText.replaceAll("{VERSION}", VERSION)
 );
+
+document.querySelectorAll("a").forEach(element => {
+   element.onclick = (e => {
+       e.preventDefault();
+       chrome.tabs.create({url: element.href});
+       window.close();
+   });
+});

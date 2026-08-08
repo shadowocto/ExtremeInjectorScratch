@@ -1,0 +1,30 @@
+html, body {
+    background: #f0f0f0;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+}
+
+fieldset {
+    width: calc(50vw - 34px);
+    height: min-content;
+}
+
+.buttons {
+    transform: translateY(-100%);
+    width: calc(100vw - 21px);
+    top: calc(100% - 10px);
+    position: absolute;
+    display: flex;
+    left: 10px;
+}
+
+.buttons button {
+    width: 120px;
+}
+
+.spacer {
+    flex: 1;
+}

@@ -1,0 +1,65 @@
+:root {
+    --selection: #364670;
+}
+
+body, html {
+    background: #1e1e1e;
+}
+
+.title-bar {
+    background: #232323;
+    color: #afafaf;
+}
+
+fieldset {
+    border: 1px solid #3c3c3c;
+}
+
+fieldset .table {
+    border: 1px solid #505050;
+    background: #2e2e2e;
+}
+
+table {
+    color: #afafaf;
+}
+
+table th {
+    border-color: #3c3c3c;
+}
+
+table tr:hover {
+    background: #373737;
+}
+
+table tr.selected {
+    background: var(--selection);
+    color: white;
+}
+
+button {
+    border-color: #505050;
+    background: #373737;
+    color: #afafaf;
+}
+
+button:hover, input[type=checkbox]:hover, .dropdown:hover, .dropdown.expanded {
+    border-color: #afafaf;
+    background: #646464;
+}
+
+button[disabled] {
+    pointer-events: none;
+    border-color: #323232;
+    background: #232323;
+    color: #646464;
+}
+
+input[type="checkbox"] {
+    border-color: #505050;
+    background: #373737;
+}
+
+input[type="checkbox"]:checked::after {
+    border-color: white;
+}

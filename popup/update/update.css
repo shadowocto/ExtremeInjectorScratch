@@ -1,0 +1,40 @@
+html, body {
+    overflow: hidden;
+}
+
+.content {
+    align-items: center;
+    width: max-content;
+    font-size: 1.2em;
+    display: flex;
+    gap: 10px;
+    left: 50%;
+    top: 50%;
+}
+
+.content div {
+    transform: translateY(-2px);
+}
+
+img {
+    width: 40px;
+}
+
+p {
+    margin: -3px 0;
+}
+
+.buttons {
+    display: flex;
+    margin: 10px 0 10px;
+    width: 100%;
+    gap: 10px;
+}
+
+button {
+    width: 80px;
+}
+
+.spacer {
+    flex: 1;
+}

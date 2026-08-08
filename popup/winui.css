@@ -1,0 +1,143 @@
+:root {
+    --selection: #0278D7;
+}
+
+body, button, input {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    user-select: none;
+}
+
+button, .dropdown {
+    transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
+    border: 1px solid #ADADAD;
+    background-color: #E1E1E1;
+    font-size: 0.95em;
+    font-weight: 500;
+    height: 22px;
+}
+
+button:hover, input[type=checkbox]:hover, .dropdown:hover, .dropdown.expanded {
+    background-color: #E5F1FB;
+    border-color: #0278D7;
+}
+
+button[disabled] {
+    pointer-events: none;
+}
+
+input[type="checkbox"] {
+    transition: background-color 0.3s ease-in, border-color 0.3s ease-in;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    position: relative;
+    appearance: none;
+    height: 14px;
+    width: 14px;
+}
+
+input[type="checkbox"]:checked::after {
+    border-width: 0 1px 1px 0;
+    transform: rotate(45deg);
+    border-color: #000000;
+    border-style: solid;
+    position: absolute;
+    content: "";
+    height: 9px;
+    width: 4px;
+    left: 4px;
+}
+
+table {
+    height: min-content;
+    border-spacing: 0;
+    color: black;
+    width: 100%;
+}
+
+table * {
+    font-weight: normal;
+    padding-left: 6px;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+table th {
+    border-right: 1px solid #cdcdcd;
+    min-width: 6px;
+    height: 22px;
+}
+
+table tr:hover {
+    background: #f1f1f1;
+}
+
+table tr.selected {
+    background: var(--selection);
+    color: white;
+}
+
+/*
+    Anything below this point is unaffected by themes
+    because the settings menu doesn't use them
+*/
+label {
+    position: relative;
+    top: -5px;
+}
+
+.dropdown.expanded {
+    background-color: #CCE4F7;
+}
+
+.dropdown {
+    text-align: left;
+}
+
+.dropdown div {
+    position: relative;
+    left: 6px;
+}
+
+.dropdown .arrow {
+    border-width: 0 1px 1px 0;
+    left: calc(100% - 13px);
+    border-color: #3c3c3c;
+    border-style: solid;
+    margin-bottom: -3px;
+    position: relative;
+    rotate: 45deg;
+    height: 5px;
+    width: 5px;
+    top: 7px;
+}
+
+.dropdown .options {
+    border: 1px solid var(--selection);
+    box-shadow: 2px 2px 3px rgb(0 0 0 / 0.5);
+    opacity: 0;
+    height: 0;
+    top: 5px;
+    left: 0;
+}
+
+.dropdown.expanded .options {
+    height: max-content;
+    opacity: 1;
+}
+
+.dropdown .options div {
+    background: white;
+    padding-left: 5px;
+    height: 15px;
+    left: 0;
+}
+
+.dropdown .options div:hover {
+    background: var(--selection);
+    color: white;
+}
+
+input[disabled], label[disabled] {
+    pointer-events: none;
+    opacity: 0.5;
+}

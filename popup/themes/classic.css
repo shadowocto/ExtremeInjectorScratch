@@ -1,0 +1,17 @@
+body, html {
+    background: linear-gradient(#1E90FF, #00BFFF) no-repeat;
+}
+
+.title-bar {
+    background: white;
+    color: black;
+}
+
+fieldset {
+    border: 1px solid #646464;
+}
+
+fieldset .table {
+    border: 1px solid black;
+    background: white;
+}

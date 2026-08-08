@@ -28,43 +28,47 @@ hook(Function.prototype, "bind", {
 const queue = [];
 let injecting = false;
 
-async function inject(spriteBuffer) {
-    console.log(injecting,queue,queue[0]);
+async function inject(spriteBuffer, triggerFlag) {
     if (injecting)
-        await queue.push(new Promise(()=>{}))
-    injecting = true
+        await queue.push(new Promise(()=>{}));
+
+    injecting = true;
+
     try {
         const before = new WeakSet(vm.runtime.targets.filter(v => v.isOriginal));
 
-        await vm.addSprite(new Uint8Array(spriteBuffer)); // fuck you scratch for not returning the sprite
+        await vm.addSprite(new Uint8Array(spriteBuffer));
 
-        const sprites = vm.runtime.targets.filter(v => v.isOriginal).filter(v=>!before.has(v));
-        const sprite = sprites[0]; // this shouldn't fail i think
+        if (triggerFlag) {
+            const sprites = vm.runtime.targets.filter(v => v.isOriginal).filter(v=>!before.has(v));
+            const sprite = sprites[0]; // this shouldn't fail i think
 
-        const blocks = sprite.blocks;
-        const scripts = blocks.getScripts();
+            const blocks = sprite.blocks;
+            const scripts = blocks.getScripts();
 
-        for (let i = 0; i < scripts.length; i++) {
-            const block = blocks.getBlock(scripts[i]);
-            if (block.opcode == "event_whenflagclicked") {
-                vm.runtime._pushThread(block.id, sprite);
+            for (let i = 0; i < scripts.length; i++) {
+                const block = blocks.getBlock(scripts[i]);
+                if (block.opcode === "event_whenflagclicked")
+                    vm.runtime._pushThread(block.id, sprite);
             }
+
+            console.log("Triggered sprite's green flag blocks");
         }
 
         console.log("Sprite injected successfully");
     } catch (error) {
         console.error("Failed to inject sprite:", error);
     }
-    console.log(queue);
-    if (queue[0] != null) {
+
+    if (queue[0] != null)
         Promise.resolve(queue.shift());
-    }
+
     injecting = false;
 }
 
 document.addEventListener('ei-inject', event => {
     const data = event.detail;
     console.log(`Performing sprite injection of '${data.name}'`);
-    inject(base64ToArrayBuffer(data.spriteBytes));
+    let _ = inject(base64ToArrayBuffer(data.spriteBytes), data.triggerFlag);
 });
 

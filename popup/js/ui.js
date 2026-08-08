@@ -8,6 +8,8 @@ fileSelector.type = "file";
 
 const injectButton = document.getElementById("inject");
 
+const themeStyles = document.getElementById("theme");
+
 class Sprite {
     name = "?";
     enabled = true;
@@ -139,7 +141,13 @@ document.getElementById("about").addEventListener('click',() => {
 });
 
 document.getElementById("settings").addEventListener('click',() => {
-    // TODO
+    chrome.windows.create({
+        url: chrome.runtime.getURL('popup/settings/settings.html'),
+        type: 'popup',
+        focused: true,
+        width: 455,
+        height: 420
+    });
 });
 
 loadFromLocalStorage();
@@ -154,9 +162,64 @@ loadFromLocalStorage();
                 if (!sprite.enabled)
                     continue;
 
-                chrome.tabs.sendMessage(tab.id, {type: "ei-inject", name: sprite.name, spriteBytes: sprite.spriteBytes});
+                chrome.tabs.sendMessage(
+                    tab.id, {
+                        type: "ei-inject",
+                        name: sprite.name,
+                        spriteBytes: sprite.spriteBytes,
+                        triggerFlag: settings.greenFlag
+                    }
+                );
+
                 console.log(`Sent inject signal for '${sprite.name}'`);
             }
         });
     }
 })();
+
+function applySettings() {
+    updateSettings();
+
+    for (const element of document.querySelectorAll("*")) {
+        const previousTransition = element.style.transition;
+        element.style.transition = "none";
+        setTimeout(() => element.style.transition = previousTransition, 100);
+    }
+
+    switch (settings.theme) {
+        case "Classic (Blue)":
+            themeStyles.href = "themes/classic.css";
+            break;
+        case "Modern":
+            themeStyles.href = "themes/modern.css";
+            break;
+    }
+}
+
+chrome.runtime.onMessage.addListener((message) => {
+   if (message.type === "update-settings")
+       applySettings();
+});
+
+applySettings();
+
+async function checkForUpdates() {
+    const lastIgnored = localStorage.getItem("ignored");
+    if (lastIgnored && (Date.now() - lastIgnored) / 1000 < 21600) // 6 hours
+        return;
+
+    const response = await fetch("https://raw.githubusercontent.com/shadowocto/ExtremeInjectorScratch/refs/heads/main/version");
+    const version = await response.text();
+
+    if (version !== VERSION) {
+        chrome.windows.create({
+            url: chrome.runtime.getURL(`popup/update/update.html?version=${version}`),
+            type: 'popup',
+            focused: true,
+            width: 370,
+            height: 123
+        });
+    }
+}
+
+setTimeout(checkForUpdates, 500);

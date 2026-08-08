@@ -1,0 +1,57 @@
+body, html {
+    height: max-content;
+    width: 350px;
+    color: white;
+    margin: 0;
+}
+
+.title-bar {
+    align-items: center;
+    display: flex;
+    padding: 1px;
+    gap: 2px;
+}
+
+.title-bar img {
+    height: 2em;
+}
+
+.title-bar span {
+    transform: translateY(-1px);
+    font-size: 1.1em;
+}
+
+.content {
+    width: calc(100% - 10px);
+    padding: 4px 5px 7px;
+}
+
+fieldset {
+    margin-bottom: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+/* table container */
+fieldset .table {
+    max-height: 104px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.buttons {
+    justify-content: space-between;
+    padding: 0 2px;
+    display: flex;
+}
+
+.buttons button {
+    width: 100px;
+}
+
+fieldset .buttons {
+    justify-content: unset;
+    flex-direction: column;
+    width: 100px;
+    gap: 6px;
+}
