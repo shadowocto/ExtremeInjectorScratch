@@ -211,7 +211,7 @@ async function checkForUpdates() {
     const response = await fetch("https://raw.githubusercontent.com/shadowocto/ExtremeInjectorScratch/refs/heads/main/version");
     const version = await response.text();
 
-    if (version !== VERSION) {
+    if (response.ok && version !== VERSION) {
         chrome.windows.create({
             url: chrome.runtime.getURL(`popup/update/update.html?version=${version}`),
             type: 'popup',
